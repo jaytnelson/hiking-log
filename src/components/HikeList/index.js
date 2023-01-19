@@ -9,6 +9,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { DateTime } from 'luxon';
 
 function HikeList() {
   const [hikes, setHikes] = useState([]);
@@ -38,15 +39,15 @@ function HikeList() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {hikes.map((row) => (
+              {hikes.length > 0 && hikes.map((row) => (
                 <TableRow
-                  key={row.name}
+                  key={row.title}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
                     {row.name}
                   </TableCell>
-                  <TableCell align="right">{row.date}</TableCell>
+                  <TableCell align="right">{DateTime.fromISO(row.date).toLocaleString()}</TableCell>
                   <TableCell align="right">{row.distance}</TableCell>
                 </TableRow>
               ))}
