@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 // import { NavLink } from "react-router-dom";
 import Link from '@mui/material/Link';
 import AppBar from '@mui/material/AppBar';
@@ -12,12 +13,12 @@ import Container from '@mui/material/Container';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useAuth0 } from "@auth0/auth0-react";
 
 // import styles from './NavBar.scss';
 
-const settings = ['Profile', 'Logout'];
-
-function NavBar() {
+function NavBar(props) {
+    const { user } = props; //object destructuring
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -34,6 +35,23 @@ function NavBar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+
+  const LoginButton = () => {
+    const { loginWithRedirect } = useAuth0();
+  
+    return <button onClick={() => loginWithRedirect()}>Log In</button>;
+  };
+
+  const LogoutButton = () => {
+    const { logout } = useAuth0();
+  
+    return (
+      <button onClick={() => logout({ returnTo: window.location.origin })}>
+        Log Out
+      </button>
+    );
   };
 
   return (
@@ -136,11 +154,14 @@ function NavBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem>
+                {!user &&
+                <LoginButton />}
+              </MenuItem>
+              <MenuItem>
+                {user &&
+                <LogoutButton />}
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
@@ -148,4 +169,10 @@ function NavBar() {
     </AppBar>
   );
 }
+
 export default NavBar;
+
+NavBar.propTypes = {
+  user: PropTypes.shape
+};
+
