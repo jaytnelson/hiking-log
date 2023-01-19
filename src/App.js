@@ -1,6 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Outlet, Link } from "react-router-dom";
+import { 
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Outlet
+} from "react-router-dom";
+
 import HikeList from './components/HikeList'
+import NavBar from './components/NavBar'
 
 function App() {
   return (
@@ -20,18 +27,7 @@ function Layout() {
     <div>
       {/* A "layout route" is a good place to put markup you want to
           share across all the pages on your site, like navigation. */}
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/hikes">Hikes</Link>
-          </li>
-        </ul>
-      </nav>
-
-      <hr />
+      <NavBar />
 
       {/* An <Outlet> renders whatever child route is currently active,
           so you can think about this <Outlet> as a placeholder for
