@@ -27,8 +27,7 @@ function HikeList() {
 
   return (
     <Container maxWidth="lg">
-      <Box>
-        <Paper>
+      <Box sx={{ padding: '16px' }}>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -54,7 +53,6 @@ function HikeList() {
             </TableBody>
           </Table>
         </TableContainer>
-        </Paper>
       </Box>
     </Container>
   );

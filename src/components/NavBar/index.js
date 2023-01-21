@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-// import { NavLink } from "react-router-dom";
 import Link from '@mui/material/Link';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,10 +14,9 @@ import MenuItem from '@mui/material/MenuItem';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useAuth0 } from "@auth0/auth0-react";
 
-// import styles from './NavBar.scss';
-
 function NavBar(props) {
-    const { user } = props; //object destructuring
+  const { user } = props;
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -173,6 +171,6 @@ function NavBar(props) {
 export default NavBar;
 
 NavBar.propTypes = {
-  user: PropTypes.shape
+  user: PropTypes.object
 };
 

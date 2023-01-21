@@ -53,5 +53,5 @@ function Home() {
 export default App;
 
 Layout.propTypes = {
-  user: PropTypes.shape
+  user: PropTypes.object
 };
