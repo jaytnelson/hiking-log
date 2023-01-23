@@ -60,12 +60,14 @@ function NavBar(props) {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <img src={logo} alt="logo" style={{ height: 60 }} />
+          <div className={styles.navLink}>
+            <Link to="/">
+              <img src={logo} alt="logo" style={{ height: '60px' }} />
+            </Link>
+          </div>
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -76,8 +78,11 @@ function NavBar(props) {
               textDecoration: 'none',
             }}
           >
-            Hiking Log
+            <span className={styles.navLink}>
+              <Link to="/">Hiking Log</Link>
+            </span>
           </Typography>
+            
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
