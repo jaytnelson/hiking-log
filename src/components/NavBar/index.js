@@ -16,6 +16,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useAuth0 } from "@auth0/auth0-react";
 
 import logo from '../../assets/logo.svg';
+import styles from './NavBar.module.scss';
 
 function NavBar(props) {
   const { user } = props;
@@ -109,7 +110,9 @@ function NavBar(props) {
             >
               <MenuItem onClick={handleCloseNavMenu}>
                 {/* <Link underline="none" color="white" href="/hikes">Hikes</Link> */}
-                <Link to="/hikes">Hikes</Link>
+                <span className={styles.navLink}>
+                  <Link to="/hikes">Hikes</Link>
+                </span>
               </MenuItem>
             </Menu>
           </Box>
@@ -133,7 +136,9 @@ function NavBar(props) {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {/* <Link underline="none" color="white" href="/hikes">Hikes</Link> */}
-            <Link to="/hikes">Hikes</Link>
+            <span className={styles.navLink}>
+              <Link to="/hikes">Hikes</Link>
+            </span>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
