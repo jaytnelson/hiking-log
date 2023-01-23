@@ -1,6 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import Link from '@mui/material/Link';
+import { Link } from "react-router-dom";
+// import Link from '@mui/material/Link';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,6 +14,8 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useAuth0 } from "@auth0/auth0-react";
+
+import logo from '../../assets/logo.svg';
 
 function NavBar(props) {
   const { user } = props;
@@ -56,6 +59,7 @@ function NavBar(props) {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          <img src={logo} alt="logo" style={{ height: 60 }} />
           <Typography
             variant="h6"
             noWrap
@@ -104,7 +108,8 @@ function NavBar(props) {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                <Link underline="none" color="white" href="/hikes">Hikes</Link>
+                {/* <Link underline="none" color="white" href="/hikes">Hikes</Link> */}
+                <Link to="/hikes">Hikes</Link>
               </MenuItem>
             </Menu>
           </Box>
@@ -127,7 +132,8 @@ function NavBar(props) {
             Hiking Log
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            <Link underline="none" color="white" href="/hikes">Hikes</Link>
+            {/* <Link underline="none" color="white" href="/hikes">Hikes</Link> */}
+            <Link to="/hikes">Hikes</Link>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
