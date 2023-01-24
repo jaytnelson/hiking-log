@@ -44,14 +44,6 @@ function App() {
             }
           />
           <Route
-            path="hikes"
-            element={
-              <PrivateRoute auth={isAuthenticated}>
-                <HikeList />
-              </PrivateRoute>
-            }
-          />
-          <Route
             path="hikes/new"
             element={
               <PrivateRoute auth={isAuthenticated}>
