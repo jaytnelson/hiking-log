@@ -11,6 +11,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import HikeNew from './components/HikeNew'
 import HikeList from './components/HikeList'
+import LogIn from './components/LogIn'
 import NavBar from './components/NavBar'
 
 function Redirect({component, path, auth}) {
@@ -51,8 +52,8 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route path="login" element={<LogIn isAuthenticated={isAuthenticated} />} />
         </Route>
-        <Route path="login" element={<Login />} />
       </Routes>
     </Router>
   );
@@ -82,23 +83,16 @@ function Home() {
   );
 }
 
-function Login({user = null}) {
-  return (
-    <div>
-      <NavBar user={user} />
-      <h2>Login</h2>
-    </div>
-  );
-}
-
 export default App;
 
 Layout.propTypes = {
   user: PropTypes.object
 };
-Login.propTypes = {
-  user: PropTypes.object
+
+LogIn.propTypes = {
+  isAuthenticated: PropTypes.bool
 };
+
 PrivateRoute.propTypes = {
   children: PropTypes.object,
   auth: PropTypes.bool
