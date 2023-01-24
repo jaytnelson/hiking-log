@@ -11,7 +11,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import HikeNew from './components/HikeNew';
 import HikeList from './components/HikeList';
-// import Home from './components/Home';
 import LogIn from './components/LogIn';
 import NavBar from './components/NavBar';
 
