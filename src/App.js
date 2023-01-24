@@ -9,10 +9,11 @@ import {
 } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import HikeNew from './components/HikeNew'
-import HikeList from './components/HikeList'
-import LogIn from './components/LogIn'
-import NavBar from './components/NavBar'
+import HikeNew from './components/HikeNew';
+import HikeList from './components/HikeList';
+import Home from './components/Home';
+import LogIn from './components/LogIn';
+import NavBar from './components/NavBar';
 
 function Redirect({component, path, auth}) {
   if (auth) {
@@ -28,14 +29,20 @@ const PrivateRoute = ({ children, auth }) => {
 
 function App() {
   const { user, isAuthenticated } = useAuth0();
-  console.log('user: ', isAuthenticated);
 
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Layout user={user} />}>
           <Route index element={<Home />} />
-          {/* <Redirect auth={isAuthenticated} component={<HikeList />} path="hikes" /> */}
+          <Route
+            path="hikes"
+            element={
+              <PrivateRoute auth={isAuthenticated}>
+                <HikeList />
+              </PrivateRoute>
+            }
+          />
           <Route
             path="hikes"
             element={
@@ -70,15 +77,6 @@ function Layout({user = null}) {
           so you can think about this <Outlet> as a placeholder for
           the child routes we defined above. */}
       <Outlet />
-    </div>
-  );
-}
-
-
-function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
     </div>
   );
 }
