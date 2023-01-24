@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
+import HikeNew from './components/HikeNew'
 import HikeList from './components/HikeList'
 import NavBar from './components/NavBar'
 
@@ -39,6 +40,14 @@ function App() {
             element={
               <PrivateRoute auth={isAuthenticated}>
                 <HikeList />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="hikes/new"
+            element={
+              <PrivateRoute auth={isAuthenticated}>
+                <HikeNew />
               </PrivateRoute>
             }
           />

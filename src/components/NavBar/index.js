@@ -114,9 +114,13 @@ function NavBar(props) {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                {/* <Link underline="none" color="white" href="/hikes">Hikes</Link> */}
                 <span className={styles.navLink}>
                   <Link to="/hikes">Hikes</Link>
+                </span>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <span className={styles.navLink}>
+                  <Link to="/hikes/new">New</Link>
                 </span>
               </MenuItem>
             </Menu>
@@ -139,11 +143,13 @@ function NavBar(props) {
           >
             Hiking Log
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {/* <Link underline="none" color="white" href="/hikes">Hikes</Link> */}
-            <span className={styles.navLink}>
+          <Box className={styles.navLink} sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            <div className={styles.navItem}>
               <Link to="/hikes">Hikes</Link>
-            </span>
+            </div>
+            <div className={styles.navItem}>
+              <Link to="/hikes/new">New</Link>
+            </div>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
