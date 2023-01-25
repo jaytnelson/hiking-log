@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
@@ -12,18 +13,24 @@ import TableRow from '@mui/material/TableRow';
 import { DateTime } from 'luxon';
 
 function HikeList() {
+  const { getAccessTokenSilently } = useAuth0();
   const [hikes, setHikes] = useState([]);
 
-  const getHikes = () => fetch(process.env.REACT_APP_HIKE_API_URL)
-  .then((response) => response.json())
-  .then((data) => {
-    console.log(data);
-    setHikes(data);
-  });
-
   useEffect(() => {
-    getHikes();
-  }, []);
+    (async () => {
+      try {
+        const token = await getAccessTokenSilently();
+        const response = await fetch(`${process.env.REACT_APP_HIKE_API_URL}hikes`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setHikes(await response.json());
+      } catch (e) {
+        console.error(e);
+      }
+    })();
+  }, [getAccessTokenSilently]);
 
   return (
     <Container maxWidth="lg">
