@@ -46,7 +46,7 @@ function HikeList() {
                 <TableRow>
                   <TableCell>Name</TableCell>
                   <TableCell align="right">Date</TableCell>
-                  <TableCell align="right">Distance</TableCell>
+                  <TableCell align="right">Distance &#40;mi&#41;</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
