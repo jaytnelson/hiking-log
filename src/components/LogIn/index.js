@@ -15,7 +15,7 @@ function LogIn({isAuthenticated}) {
         <div className={styles.loginContainer}>
           <div className={styles.loginContent}>
             {isAuthenticated ? (
-              <Button variant="contained" onClick={() => logout({ returnTo: window.location.origin })}>Log Out</Button>
+              <Button variant="contained" onClick={() => logout({ returnTo: process.env.REACT_APP_REDIRECT })}>Log Out</Button>
             ) : (
               <Button variant="contained" onClick={() => loginWithRedirect()}>Log In</Button>
             )}

@@ -50,7 +50,7 @@ function NavBar(props) {
     const { logout } = useAuth0();
   
     return (
-      <button onClick={() => logout({ returnTo: window.location.origin })}>
+      <button onClick={() => logout({ returnTo: process.env.REACT_APP_REDIRECT })}>
         Log Out
       </button>
     );

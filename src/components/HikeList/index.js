@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { Link } from "react-router-dom";
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
@@ -35,8 +36,9 @@ function HikeList() {
   return (
     <Container maxWidth="lg">
       <Box sx={{ padding: '16px' }}>
+        <h2>Hikes</h2>
         <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <Table sx={{ minWidth: 650 }} aria-label="hikes table">
             <TableHead>
               <TableRow>
                 <TableCell>Name</TableCell>
@@ -51,7 +53,9 @@ function HikeList() {
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {row.name}
+                    <Link to={`/hikes/${row.hikeid}`}>
+                      {row.name}
+                    </Link>
                   </TableCell>
                   <TableCell align="right">{DateTime.fromISO(row.date).toLocaleString()}</TableCell>
                   <TableCell align="right">{row.distance}</TableCell>

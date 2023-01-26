@@ -12,11 +12,14 @@ function HikeNew() {
     defaultValues: {
       name: '',
       date: '',
-      distance: ''
+      distance: '',
+      gallery:'',
     }
   });
-  const onSubmit = data => console.log(data);
 
+  const onSubmit = (data) => {
+    console.log(data)
+  };
 
   return (
     <Container maxWidth="lg">
@@ -42,6 +45,13 @@ function HikeNew() {
               name="distance"
               control={control}
               render={({ field }) => <TextField {...field} label="Distance" variant="standard" />}
+            />
+          </div>
+          <div className={styles.formItem}>
+            <Controller
+              name="gallery"
+              control={control}
+              render={({ field }) => <TextField {...field} label="Gallery URL" variant="standard" />}
             />
           </div>
           <div className={styles.formItem}>
