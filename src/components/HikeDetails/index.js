@@ -2,15 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
-
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import { DateTime } from 'luxon';
+
+import styles from './HikeDetails.module.scss';
 
 function HikeDetails() {
   const { hikeid } = useParams()
@@ -39,7 +41,7 @@ function HikeDetails() {
   return (
     <Container maxWidth="lg">
       <Box sx={{ padding: '16px' }}>
-        {hike && hike.length > 0 && (
+        {hike && hike.length > 0 ? (
           <>
             <h2>{hike[0]?.name}</h2>
             <TableContainer component={Paper}>
@@ -51,7 +53,11 @@ function HikeDetails() {
                   </TableRow>
                   <TableRow>
                     <TableCell align="left">Distance</TableCell>
-                    <TableCell align="right">{hike[0]?.distance}</TableCell>
+                    <TableCell align="right">
+                      {hike[0]?.distance && (
+                        <span>{hike[0].distance} miles</span>
+                      )}
+                    </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell align="left">Gallery</TableCell>
@@ -61,6 +67,12 @@ function HikeDetails() {
               </Table>
             </TableContainer>
           </>
+        ) : (
+          <div className={styles.progressContainer}>
+            <div className={styles.progressContent}>
+              <CircularProgress />
+            </div>
+          </div>
         )}
       </Box>
     </Container>
