@@ -18,7 +18,6 @@ function HikeDetails() {
   const { hikeid } = useParams()
   const { getAccessTokenSilently } = useAuth0();
   const [hike, setHike] = useState(null);
-  console.log('HIKE: ', hike);
 
   useEffect(() => {
     (async () => {
