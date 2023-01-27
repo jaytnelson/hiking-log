@@ -1,7 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
-// import Link from '@mui/material/Link';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -20,6 +19,7 @@ import styles from './NavBar.module.scss';
 
 function NavBar(props) {
   const { user } = props;
+  const { loginWithRedirect, logout } = useAuth0();
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -37,23 +37,6 @@ function NavBar(props) {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-  };
-
-
-  const LoginButton = () => {
-    const { loginWithRedirect } = useAuth0();
-  
-    return <button onClick={() => loginWithRedirect()}>Log In</button>;
-  };
-
-  const LogoutButton = () => {
-    const { logout } = useAuth0();
-  
-    return (
-      <button onClick={() => logout({ returnTo: process.env.REACT_APP_REDIRECT })}>
-        Log Out
-      </button>
-    );
   };
 
   return (
@@ -115,12 +98,12 @@ function NavBar(props) {
                 }}
               >
                 <MenuItem onClick={handleCloseNavMenu}>
-                  <span className={styles.navLink}>
+                  <span className={styles.menuNavLink}>
                     <Link to="/hikes">Hikes</Link>
                   </span>
                 </MenuItem>
                 <MenuItem onClick={handleCloseNavMenu}>
-                  <span className={styles.navLink}>
+                  <span className={styles.menuNavLink}>
                     <Link to="/hikes/new">New</Link>
                   </span>
                 </MenuItem>
@@ -183,14 +166,14 @@ function NavBar(props) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem>
-                {!user &&
-                <LoginButton />}
-              </MenuItem>
-              <MenuItem>
-                {user &&
-                <LogoutButton />}
-              </MenuItem>
+              {!user &&
+              <MenuItem onClick={() => loginWithRedirect()}>
+                Log In
+              </MenuItem>}
+              {user &&
+              <MenuItem onClick={() => logout({ returnTo: process.env.REACT_APP_REDIRECT })}>
+                Log Out
+              </MenuItem>}
             </Menu>
           </Box>
         </Toolbar>
