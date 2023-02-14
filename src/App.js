@@ -1,53 +1,82 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Outlet, Link } from "react-router-dom";
-import HikeList from './components/HikeList'
+import PropTypes from 'prop-types';
+import { 
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  Outlet
+} from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+
+import HikeDetails from './components/HikeDetails';
+import HikeList from './components/HikeList';
+import HikeNew from './components/HikeNew';
+import LogIn from './components/LogIn';
+import NavBar from './components/NavBar';
+
+const PrivateRoute = ({ children, auth }) => {
+  return auth ? children : <Navigate to="/" />;
+}
 
 function App() {
+  const { user, isAuthenticated } = useAuth0();
+
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="hikes" element={<HikeList />} />
+        <Route path="/" element={<Layout user={user} />}>
+          <Route index element={<LogIn isAuthenticated={isAuthenticated} />} />
+          <Route
+            path="hikes"
+            element={
+              <PrivateRoute auth={isAuthenticated}>
+                <HikeList />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="hikes/new"
+            element={
+              <PrivateRoute auth={isAuthenticated}>
+                <HikeNew />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="hikes/:hikeid"
+            element={
+              <PrivateRoute auth={isAuthenticated}>
+                <HikeDetails />
+              </PrivateRoute>
+            }
+          />
         </Route>
       </Routes>
     </Router>
   );
 }
 
-function Layout() {
+function Layout({user = null}) {
   return (
     <div>
-      {/* A "layout route" is a good place to put markup you want to
-          share across all the pages on your site, like navigation. */}
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/hikes">Hikes</Link>
-          </li>
-        </ul>
-      </nav>
-
-      <hr />
-
-      {/* An <Outlet> renders whatever child route is currently active,
-          so you can think about this <Outlet> as a placeholder for
-          the child routes we defined above. */}
+      <NavBar user={user} />
       <Outlet />
     </div>
   );
 }
 
-
-function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
-    </div>
-  );
-}
-
 export default App;
+
+Layout.propTypes = {
+  user: PropTypes.object
+};
+
+LogIn.propTypes = {
+  isAuthenticated: PropTypes.bool
+};
+
+PrivateRoute.propTypes = {
+  children: PropTypes.object,
+  auth: PropTypes.bool
+};
